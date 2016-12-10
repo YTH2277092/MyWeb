@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <link type="text/css" rel="stylesheet" href="~/Content/Tree/zTreeStyle.css"/>
+
+    <script type="text/javascript" src="~/Scripts/Tree/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Tree/jquery.ztree.all-3.2.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/Tree/jquery.ztree.excheck-3.2.min.js"></script>*@
+    @*<script type="text/javascript" src="~/Scripts/Tree/jquery.ztree.core-3.2.min.js"></script>*@
+
+    <script language="JavaScript">
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "../CheckTree/GetAll",
+                data: {
+
+                },
+                contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var object = data[i];
+                        
+                    }
+                },
+                error: function (data) {
+                    CloseLoading();
+                    alert("查询出错导致无法获取数据！请记住此次查询条件，方便工作人员调试！");
+                }
+            });
+        });
+
+        var zTreeObj;
+        //配置
+        var setting = {
+            check: {
+                enable: true,
+                chkStyle: "checkbox",
+                chkboxType: { "Y": "ps", "N": "ps" } //Y:勾选（参数：p:影响父节点），N：不勾（参数s：影响子节点）[p 和 s 为参数，参数都不写""为全不影响]          
+            },
+            async: {
+                enable: true, // 设置 zTree是否开启异步加载模式  加载全部信息
+                url: "../CheckTree/GetAll", // Ajax 获取数据的 URL 地址  
+                autoParam: ["id"]
+            },
+            callback: {
+                //onAsyncError: FindError,
+                onAsyncSuccess: function (event, treeId, treeNode, msg) {
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: "../CheckTree/GetAll",
+                        data: {},
+                        contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                        dataType: "json",
+                        success: function (data) {
+                            for (var i = 0; i < data.length; i++) {
+                                var object = data[i];
+                                alert(object.Title);
+                            }
+                        },
+                        error: function (data) {}
+                    });
+                }
+            }
+        };
+
+        //数据源
+        var zNodes = [   // zTree 的数据属性，此处使用标准json格式    
+            {
+                name: "test1",
+                open: true,
+                children: [{ name: "test1_1" }, { name: "test1_2" }]
+            },
+            {
+                name: "test2",
+                open: true,
+                children: [{ name: "test2_1" }, { name: "test2_2" }]
+            }];
+        $(document).ready(function () {
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源   
+
+            
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        Hello
+        <ul id="treeDemo" class="ztree"></ul> 
+    </div>
+</body>
+</html>

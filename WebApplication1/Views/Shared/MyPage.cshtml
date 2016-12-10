@@ -1,0 +1,20 @@
+﻿@{
+    //子页面添加
+    Layout = "~/Views/Shared/Other.cshtml";
+    ViewBag.Title = "网站";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @ViewBag.Title - <h4>我的界面</h4>
+        @Url.Content("~/Views/Home/Index.cshtml");
+    </div>
+</body>
+</html>
