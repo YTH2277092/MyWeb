@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,50 +7,55 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class BorderController : Controller
     {
+        // GET: Border
         PSContext _db = new PSContext();
         int pageCount = 10;
 
+        /// <summary>
+        /// 获取所有信息
+        /// </summary>
+        /// <param name="skip"></param>
+        /// <returns></returns>
         public ActionResult Index(string skip)
         {
             //ArrayList list = new ArrayList() {"1","2","3" };
             var list = _db.CompanyStaffInfo.OrderBy(p => p.EnterTime).Skip((Convert.ToInt32(skip) - 1) * pageCount).Take(pageCount).ToList();//.Select(p => p.FName);
 
-            return Json(list,JsonRequestBehavior.AllowGet); 
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 获取分页获取分页控件信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetInfo()
         {
             var totalRecords = _db.CompanyStaffInfo.ToList().Count();
             var total = totalRecords % pageCount == 0 ? totalRecords / pageCount : totalRecords / pageCount + 1;
             var pageNo = totalRecords > 0 ? 1 : 0;
 
-            var info = new {Total = total,TotalRecords = totalRecords,PageNo = pageNo };
-            return Json(info,JsonRequestBehavior.AllowGet);
+            var info = new { Total = total, TotalRecords = totalRecords, PageNo = pageNo };
+            return Json(info, JsonRequestBehavior.AllowGet);
         }
 
-        //这是控制器，添加要显示的界面
-        public ActionResult Login()
+        /// <summary>
+        /// Border视图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Border()
         {
             return View();
         }
 
-        public ActionResult Main()
+        /// <summary>
+        /// StaffInfo视图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StaffInfo()
         {
-            string user = Request["user"];
-            string pass = Request["pass"];
-
-            //判断用户名和密码是否对应
-            bool isExit = _db.Logins.Any(p => p.UserName == user && p.Password == pass);
-
-            if (isExit)
-            {
-                return View();
-            }
-
-            return RedirectToAction("Login", "Home");
-
+            return View();
         }
 
     }

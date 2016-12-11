@@ -14,6 +14,9 @@
     width:70px;
     height:40px;
     background-color:#000;
+    margin-left:20px;
+    margin-top:3px;
+    margin-right:20px;
     float:left;
 }
 .Navigatioin{
@@ -21,13 +24,21 @@
     margin-left:40px;
 }
 .Navigatioin ul li {
-    display:block;
+    display:inline-block;
     height:45px;
     float:left;
     padding-left:10px;
     padding-right:10px;
     margin-left:20px;
     cursor:pointer;
+}
+
+.Border-left {
+    position:relative;
+    height:auto;
+    width:60px;
+    background-color:#ded8d8;
+    float:left;
 }
 
 

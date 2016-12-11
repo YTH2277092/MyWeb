@@ -6,22 +6,29 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title></title>
+    <meta name="viewport" content="width=device-width" />
+    <title>人员信息</title>
 
     <link type="text/css" href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link type="text/css" href="~/Content/kkpager_blue.css" rel="stylesheet" />
-    <link type="text/css" href="~/Content/Home/Main.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/Border/StaffInfo.css" rel="stylesheet" />
 
     <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Home/Main.js"></script>
+    <script type="text/javascript" src="~/Scripts/Border/StaffInfo.js"></script>
     <script type="text/javascript" src="~/Scripts/kkpager.min.js"></script>
 
 </head>
 <body>
-    @*@RenderPage("~/Views/Shared/Border.cshtml")*@
-
-
+    <div class="Table_Content">
+        <form>
+            <table border="1">
+                <tbody class="Table_Detail"></tbody>
+            </table>
+        </form>
+    </div>
+    <div class="Split_Page">
+        <div id="kkpager"></div>
+    </div>
 </body>
 </html>

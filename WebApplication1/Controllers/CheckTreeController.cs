@@ -9,7 +9,6 @@ namespace WebApplication1.Controllers
 {
     public class CheckTreeController : Controller
     {
-        MyWebContext _db = new MyWebContext();
 
         // GET: CheckTree
         public ActionResult Tree()
@@ -19,11 +18,11 @@ namespace WebApplication1.Controllers
 
         public JsonResult GetAll()
         {
-            var data = _db.Webs.Select(p => new {
-                Title = p.Title,
-            });
+            //var data = _db.Webs.Select(p => new {
+            //    Title = p.Title,
+            //});
 
-            return Json(data,JsonRequestBehavior.AllowGet);
+            return Json(null,JsonRequestBehavior.AllowGet);
         }
 
     }

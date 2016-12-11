@@ -8,10 +8,10 @@ namespace WebApplication1.Services
 {
     public class MailService
     {
-        private Db_Context _db;
+        private PSContext _db;
         public MailService()
         {
-            _db = new Db_Context();
+            _db = new PSContext();
         }
 
         #region 查看信息
